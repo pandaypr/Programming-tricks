@@ -1,0 +1,21 @@
+##Copying Masksof each Image and saving them in their Individual Folders:
+Code:
+#Saving the Names of File in a distionary
+d={}
+for filename in os.listdir('SmallSet/0/'):
+  #desc=" ".join(filename.split(".png")[0].split("_")[1:])
+  desc = filename
+  print(desc)
+  id=int(filename.split("_")[0])
+  if(id in list(d.keys())):
+    d[id].append(desc)
+  else:
+    d[id]=list([desc])
+print(desc)
+
+#Copying the Masks and saving them in individual Folders
+for i in d:
+    os.mkdir("SmallSet/masks/"+str(i))
+    for j in range(len(d[i])):
+        print(d[i][j])
+        copyfile("SmallSet/0/"+d[i][j],"SmallSet/masks/"+str(i)+"/"+d[i][j])
