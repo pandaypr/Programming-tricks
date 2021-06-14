@@ -1,4 +1,4 @@
-##Copying Masksof each Image and saving them in their Individual Folders:
+#Copying Masksof each Image and saving them in their Individual Folders:
 Code:
 #Saving the Names of File in a distionary
 d={}
@@ -13,9 +13,48 @@ for filename in os.listdir('SmallSet/0/'):
     d[id]=list([desc])
 print(desc)
 
+
 #Copying the Masks and saving them in individual Folders
 for i in d:
     os.mkdir("SmallSet/masks/"+str(i))
     for j in range(len(d[i])):
         print(d[i][j])
         copyfile("SmallSet/0/"+d[i][j],"SmallSet/masks/"+str(i)+"/"+d[i][j])
+
+
+#Copying the images into the mask Folders
+for filename in os.listdir("SmallSet/images/train"):
+    a=filename.split(".jpg")[0]
+    print(a)
+    copyfile("SmallSet/images/train/"+a+".jpg","SmallSet/masks/"+a+"/"+a+".jpg")
+
+#Remove all Skin Masks
+for i in range(2000):
+    for filename in os.listdir('SmallSet/masks/'+str(i)+'/'):
+        desc=" ".join(filename.split(".png")[0].split("_")[1:])
+        if desc == 'skin':
+            print(filename)
+            print(i)
+            os.remove('SmallSet/masks/'+str(i)+'/'+filename)
+
+#Make a not of the defective Images as well!!
+for i in a:      #a is the list with defective images
+    shutil.rmtree("SmallSet/masks/"+str(i)) 
+
+# Clubbing all the masks and making a mask imag for only one folder:
+i=0
+for filename in os.listdir('SmallSet/masks/'+str(i)+'/'):
+    mask_image = cv2.imread('SmallSet/masks/'+str(i)+'/'+filename, -1)
+    #mask_image = cv2.cvtColor(mask_image, cv2.COLOR_BGR2GRAY)
+    
+    #mask_image = np.expand_dims(mask_image, axis=-1)
+    mask = np.maximum(mask, mask_image)
+
+imshow(mask)
+plt.show()
+save_img('SmallSet/masks/'+str(i)+'/'+str(i)+".png", mask)
+
+
+
+
+
