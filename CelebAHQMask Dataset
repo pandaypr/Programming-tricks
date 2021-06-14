@@ -56,5 +56,5 @@ save_img('SmallSet/masks/'+str(i)+'/'+str(i)+".png", mask)
 
 
 
-
+#Progress Update::: Able to save one mask clubbed image, trying to save all the images
 
