@@ -55,6 +55,16 @@ plt.show()
 save_img('SmallSet/masks/'+str(i)+'/'+str(i)+".png", mask)
 
 
+# Clubbing all the masks and making a mask imag for all the folders:
 
-#Progress Update::: Able to save one mask clubbed image, trying to save all the images
-
+for folders in os.listdir('SmallSet/masks/'):
+    print(folders)
+    mask= np.zeros((512, 512,3))
+    for filename in os.listdir('SmallSet/masks/'+folders+'/'):
+        mask_image = cv2.imread('SmallSet/masks/'+folders+'/'+filename, -1)
+        #print(type(mask_image))
+        mask = np.maximum(mask, mask_image)
+    save_img('SmallSet/masks/'+folders+'/'+folders+".png", mask)
+    #imshow(mask)
+    #plt.show()
+    
