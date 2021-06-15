@@ -68,3 +68,12 @@ for folders in os.listdir('SmallSet/masks/'):
     #imshow(mask)
     #plt.show()
     
+
+#Copy only the complete mask image from masks images and paste it in a new folder as ground truths
+for folders in os.listdir('SmallSet/masks/'):
+    for filename in os.listdir('SmallSet/masks/'+folders+'/'):
+        d = filename.split(".png")[0]
+        if d == folders:
+            #copyfile("SmallSet/masks/"+folders+'/'+filename,"SmallSet/images/GroundTruth/"+filename)
+            
+ 
