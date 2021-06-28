@@ -77,3 +77,4 @@ for folders in os.listdir('SmallSet/masks/'):
             #copyfile("SmallSet/masks/"+folders+'/'+filename,"SmallSet/images/GroundTruth/"+filename)
             
  
+
