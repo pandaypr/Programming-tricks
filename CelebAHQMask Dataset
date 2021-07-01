@@ -3,8 +3,8 @@ Code:
 #Saving the Names of File in a distionary
 d={}
 for filename in os.listdir('SmallSet/0/'):
-  #desc=" ".join(filename.split(".png")[0].split("_")[1:])
-  desc = filename
+  desc=" ".join(filename.split(".png")[0].split("_")[1:])
+  #desc = filename
   print(desc)
   id=int(filename.split("_")[0])
   if(id in list(d.keys())):
